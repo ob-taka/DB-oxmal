@@ -560,7 +560,7 @@ INSERT INTO Itinerary
 VALUES
   ('I0001', 9, 'Explore Wuhan Yellow Crane Tower'),
   ('I0002', 12, 'Go Malaysia Legoland'),
-  ('I0003', 11, 'Explore Burj Khalifa in Dubai'),
+  ('I0003', 11, 'Explore Numbai'),
   ('I0004', 10, 'Visit Statue of Liberty in New York'),
   ('I0005', 13, 'Explore Tokyo DisneyLand'),
   ('I0006', 10, 'Explor Bangkok'),
@@ -579,7 +579,7 @@ VALUES
   ('0020', 'Egypt'),
   ('0033', 'France'),
   ('0044', 'UK'),
-  ('0084', 'Vietnam'),
+  ('0084', 'Itali'),
   ('0066', 'Thailand');
 
 INSERT INTO City
@@ -592,22 +592,22 @@ VALUES
   ('0003', 'Kuala lumpur','0060'),
   ('0001', 'Paris', '0033'),
   ('0020', 'London', '0044'),
-  ('0028', 'Ho Chi Minh', '0084'),
+  ('0028', 'Pisa', '0084'),
   ('0002', 'Bangkok', '0066');
 
 
 INSERT INTO Site
 VALUES
-  ('SI001', 'Dubai Burj Khalifa', '0971'),
+  ('SI001', 'Gate way of india', '0971'),
   ('SI002', 'New York Statue Of Liberty', '0212'),
   ('SI003', 'Wuhan Yellow Crane Tower', '0027'),
   ('SI004', 'Tokyo Disneyland', '0813'),
-  ('SI005', 'Great Wall of China', '0007'),
-  ('SI006', 'Leaning Tower of Pisa', '0007'),
-  ('SI007', 'Louvre', '0007'),
-  ('SI008', 'Pyrmaid', '0007'),
-  ('SI009', 'The Big Ben', '0007'),
-  ('SI010', 'Ayutthaya Temples', '0007');
+  ('SI005', 'Twin tower', '0003'),
+  ('SI006', 'Leaning Tower of Pisa', '0028'),
+  ('SI007', 'Louvre', '0001'),
+  ('SI008', 'Pyrmaid', '0236'),
+  ('SI009', 'The Big Ben', '0020'),
+  ('SI010', 'Ayutthaya Temples', '0002');
 
 
 INSERT INTO Visit
@@ -621,7 +621,7 @@ VALUES
   ('I0007', 'SI006'),
   ('I0008', 'SI007'),
   ('I0009', 'SI008'),
-  ('I00010', 'SI009');
+  ('I0010', 'SI009');
 
 INSERT INTO Staff
 VALUES
@@ -863,11 +863,6 @@ inner join City ct on ct.CityCode = s.CityCode
 inner join Country coun on coun.CountryCode = ct.CountryCode
 where coun.CountryDesc = 'China' and  b.DepartureDate > GETDATE()
 
-
-select s.StaffID, s.StaffName, sc.StaffContact, tl.LicenceNo as 'Tour leader' from Staff s 
-inner join StaffContactInfo sc on sc.StaffID = s.StaffID
-inner join TourLeader tl on tl.StaffID = sc.StaffID
-where not exists(select * from TourLeader where TourLeader.StaffID = s.StaffID)
 
 select s.StaffID as 'Staff ID', s.StaffName as 'Staff Name'
 from Staff s
