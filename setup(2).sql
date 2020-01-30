@@ -523,8 +523,8 @@ CREATE TABLE Offer
 
 
 
-insert into Customer
-values
+INSERT INTO Customer
+VALUES
   ('M0000001C', 'Cloe Eastwood', 'F'),
   ('M0000002C', 'Jaxx Henderson', 'M'),
   ('M0000003C', 'Anabelle Robin', 'F'),
@@ -539,11 +539,19 @@ values
   ('M0000012C', 'Lilith Aziz', 'F'),
   ('M0000013C', 'Nadia Amin', 'F'),
   ('M0000014C', 'Sara Bates', 'F'),
-  ('M0000015C', 'Karen Karim', 'F');
+  ('M0000015C', 'Karen Karim', 'F'),
+  ('M0000016C', 'Antoinette Ballard', 'M'),
+  ('M0000017C', 'Margarita Tucker', 'F'),
+  ('M0000018C', 'Kerry Robinson', 'F'),
+  ('M0000019C', 'Kelly Cohen', 'F'),
+  ('M0000020C', 'Doreen Weber', 'F'),
+  ('M0000021C', 'Stuart Salazar', 'M'),
+  ('M0000022C', 'Brandy White', 'M'),
+  ('M0000023C', 'Kay Thompson', 'M'),
+  ('M0000024C', 'Ray Brady', 'M');
 
-
-insert into Organiser
-values
+INSERT INTO  Organiser
+VALUES
   ('M0000001C', '66660000', 'Cloe.Eastwood@hotmail.com'),
   ('M0000002C', '99990000', 'Jaxx.Henderson@hotmail.com'),
   ('M0000003C', '11110000', 'Anabelle.Robin@hotmail.com'),
@@ -553,7 +561,16 @@ values
   ('M0000012C', '55550000', 'Lilith.Aziz@hotmail.com'),
   ('M0000013C', '62353535', 'pizzahutdelivery@hotmail.com'),
   ('M0000014C', '67773777', 'macdonalds@hotmail.com'),
-  ('M0000015C', '98769876', 'karenkarim@hotmail.com');
+  ('M0000015C', '98769876', 'karenkarim@hotmail.com'),
+  ('M0000016C', '84563927', 'Antoinette.Ballard@gmail.com'),
+  ('M0000017C', '31504032', 'Margarita.Tucker@gmail.com'),
+  ('M0000018C', '25653586', 'Kerry.Robinson@gmail.com'),
+  ('M0000019C', '53511206', 'Kelly.Cohen@gmail.com'),
+  ('M0000020C', '88711467', 'Doreen.Weber@gmail.com'),
+  ('M0000021C', '16025407', 'Stuart.Salazar@gmail.com'),
+  ('M0000022C', '82256404', 'Brandy.White@gmail.com'),
+  ('M0000023C', '12899519', 'Kay.Thompson@gmail.com'),
+  ('M0000024C', '34055847', 'Ray.Brady@gmail.com');
 
 
 INSERT INTO Itinerary
@@ -589,7 +606,7 @@ VALUES
   ('0027', 'Wuhan', '0086'),
   ('0813', 'Tokyo', '0081'),
   ('0236', 'Cairo', '0020'),
-  ('0003', 'Kuala lumpur','0060'),
+  ('0003', 'Kuala lumpur', '0060'),
   ('0001', 'Paris', '0033'),
   ('0020', 'London', '0044'),
   ('0028', 'Ho Chi Minh', '0084'),
@@ -629,11 +646,20 @@ VALUES
   ('S289', 'Kim Jong-Un'),
   ('S409', 'Frederick Tan Lin Qi'),
   ('S242', 'Seok Hong Lim'),
-  ('S999', 'The Devil'),
+  ('S999', 'Herman Powers'),
   ('S369', 'Xi Jinping'),
   ('S456', 'Yap Zhao Yi'),
   ('S732', 'Lim Yong Kai'),
-  ('S076', 'Wong Zhi Da');
+  ('S076', 'Wong Zhi Da'),
+  ('S119', 'Jimmy Vega'),
+  ('S290', 'Zachary Peters'),
+  ('S410', 'Joseph Gardner'),
+  ('S243', 'Luz Soto'),
+  ('S666', 'Clark Houston'),
+  ('S743', 'Janie Simmons'),
+  ('S450', 'Jennie Evans'),
+  ('S730', 'Janice Harris'),
+  ('S045', 'Sonja Schultz');
 
 INSERT INTO StaffContactInfo
 VALUES
@@ -645,12 +671,23 @@ VALUES
   ('S369', '98989898'),
   ('S456', '91212121'),
   ('S732', '98760987'),
-  ('S076', '92353535');
+  ('S076', '92353535'),
+  ('S119', '85910888'),
+  ('S290', '37412625'),
+  ('S410', '78886920'),
+  ('S243', '55253866'),
+  ('S666', '85166102'),
+  ('S743', '77583712'),
+  ('S450', '71908352'),
+  ('S730', '67424762'),
+  ('S045', '24212952');
 
 INSERT INTO TourLeader
 VALUES
   ('S369', '2023-JAN-31 00:00:00', 'T000000001'),
-  ('S456', '2020-Feb-29 00:00:00', 'T000000002');
+  ('S456', '2020-Feb-29 00:00:00', 'T000000002')
+,
+  ;
 
 INSERT INTO TravelAdvisor
 VALUES
@@ -854,32 +891,39 @@ SELECT *
 FROM Offer
 
 -- list the name and ID of the customer that have booked a tour for china who has yet to depart
-SELECT c.CustID as 'Customer ID', c.CustName as 'Customer Name' from Customer c 
-INNER JOIN Booking b on b.CustID  = c.CustID 
-inner join Trip t on t.ItineraryNo = b.ItineraryNo
-inner join Visit v on v.ItineraryNo = t.ItineraryNo
-inner join Site s on s.SiteID = v.SiteID
-inner join City ct on ct.CityCode = s.CityCode
-inner join Country coun on coun.CountryCode = ct.CountryCode
-where coun.CountryDesc = 'China' and  b.DepartureDate > GETDATE()
+SELECT c.CustID as 'Customer ID', c.CustName as 'Customer Name'
+from Customer c
+  INNER JOIN Booking b on b.CustID  = c.CustID
+  inner join Trip t on t.ItineraryNo = b.ItineraryNo
+  inner join Visit v on v.ItineraryNo = t.ItineraryNo
+  inner join Site s on s.SiteID = v.SiteID
+  inner join City ct on ct.CityCode = s.CityCode
+  inner join Country coun on coun.CountryCode = ct.CountryCode
+where coun.CountryDesc = 'China' and b.DepartureDate > GETDATE()
 
 
-select s.StaffID, s.StaffName, sc.StaffContact, tl.LicenceNo as 'Tour leader' from Staff s 
-inner join StaffContactInfo sc on sc.StaffID = s.StaffID
-inner join TourLeader tl on tl.StaffID = sc.StaffID
-where not exists(select * from TourLeader where TourLeader.StaffID = s.StaffID)
+select s.StaffID, s.StaffName, sc.StaffContact, tl.LicenceNo as 'Tour leader'
+from Staff s
+  inner join StaffContactInfo sc on sc.StaffID = s.StaffID
+  inner join TourLeader tl on tl.StaffID = sc.StaffID
+where not exists(select *
+from TourLeader
+where TourLeader.StaffID = s.StaffID)
 
 select s.StaffID as 'Staff ID', s.StaffName as 'Staff Name'
 from Staff s
-where not exists (select * from TourLeader where TourLeader.StaffID = s.StaffID)
+where not exists (select *
+from TourLeader
+where TourLeader.StaffID = s.StaffID)
 
 
-select * from Customer c
-inner join Booking b on b.CustID = c.CustID
-inner join Trip t on t.ItineraryNo = b.ItineraryNo
-inner join CheckIn ci on ci.ItineraryNo = t.ItineraryNo
-inner join BookedRooms br on br.BookingNo = b.BookingNo
-inner join RoomType rt on rt.RmTypeID = br.RmTypeID
+select *
+from Customer c
+  inner join Booking b on b.CustID = c.CustID
+  inner join Trip t on t.ItineraryNo = b.ItineraryNo
+  inner join CheckIn ci on ci.ItineraryNo = t.ItineraryNo
+  inner join BookedRooms br on br.BookingNo = b.BookingNo
+  inner join RoomType rt on rt.RmTypeID = br.RmTypeID
 where ci.CheckInDate < '2020-2-3' and rt.RmDesc like 'Single%'
 
 
