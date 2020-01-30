@@ -726,7 +726,13 @@ VALUES
   ('KB7637', 'United Airlines', 'Singapore', 'Tokyo', 6),
   ('JB5634', 'JetBlue', 'Singapore', 'New York', 18),
   ('LG8900', 'Emirates', 'Singapore', 'Dubai', 10),
-  ('ST1569', 'Singapore Airlines', 'Singapore', 'Kuala Lumpur', 1);
+  ('ST1569', 'Singapore Airlines', 'Singapore', 'Kuala Lumpur', 1),
+  ('FK6727', 'JetStar', 'Singapore', 'Cairo', 1), #
+  ('JK1236', 'JetStar', 'Singapore', 'London', 1), #
+  ('FC0906', 'JetStar', 'Singapore', 'Pisa', 1), #
+  ('BJ1031', 'JetStar', 'Singapore', 'Bangkok', 1), #
+  ('LP5629', 'JetStar', 'Singapore', 'Paris', 1); #
+  
 
 
 INSERT INTO Trip
