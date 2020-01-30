@@ -818,7 +818,7 @@ VALUES
   ('RM02', 'B000000007', NULL, 3),
   ('RM03', 'B000000008', NULL, 1),
   ('RM05', 'B000000009', NULL, 2),
-  ('RM01', 'B000000010', NULL, 3),
+  ('RM01', 'B000000010', NULL, 3);
 
 
 INSERT INTO ValidPromo
@@ -894,55 +894,5 @@ SELECT *
 FROM ValidPromo
 SELECT *
 FROM Offer
-
--- list the name and ID of the customer that have booked a tour for china who has yet to depart
-<<<<<<< HEAD
-SELECT c.CustID as 'Customer ID', c.CustName as 'Customer Name' from Customer c 
-INNER JOIN Booking b on b.CustID  = c.CustID 
-inner join Trip t on t.ItineraryNo = b.ItineraryNo
-inner join Visit v on v.ItineraryNo = t.ItineraryNo
-inner join Site s on s.SiteID = v.SiteID
-inner join City ct on ct.CityCode = s.CityCode
-inner join Country coun on coun.CountryCode = ct.CountryCode
-where coun.CountryDesc = 'China' and  b.DepartureDate > GETDATE()
-
-
-=======
-SELECT c.CustID as 'Customer ID', c.CustName as 'Customer Name'
-from Customer c
-  INNER JOIN Booking b on b.CustID  = c.CustID
-  inner join Trip t on t.ItineraryNo = b.ItineraryNo
-  inner join Visit v on v.ItineraryNo = t.ItineraryNo
-  inner join Site s on s.SiteID = v.SiteID
-  inner join City ct on ct.CityCode = s.CityCode
-  inner join Country coun on coun.CountryCode = ct.CountryCode
-where coun.CountryDesc = 'China' and b.DepartureDate > GETDATE()
-
-
-select s.StaffID, s.StaffName, sc.StaffContact, tl.LicenceNo as 'Tour leader'
-from Staff s
-  inner join StaffContactInfo sc on sc.StaffID = s.StaffID
-  inner join TourLeader tl on tl.StaffID = sc.StaffID
-where not exists(select *
-from TourLeader
-where TourLeader.StaffID = s.StaffID)
-
->>>>>>> 3851c83a3dbeef7180009a65b654d65751393cb9
-select s.StaffID as 'Staff ID', s.StaffName as 'Staff Name'
-from Staff s
-where not exists (select *
-from TourLeader
-where TourLeader.StaffID = s.StaffID)
-
-
-select *
-from Customer c
-  inner join Booking b on b.CustID = c.CustID
-  inner join Trip t on t.ItineraryNo = b.ItineraryNo
-  inner join CheckIn ci on ci.ItineraryNo = t.ItineraryNo
-  inner join BookedRooms br on br.BookingNo = b.BookingNo
-  inner join RoomType rt on rt.RmTypeID = br.RmTypeID
-where ci.CheckInDate < '2020-2-3' and rt.RmDesc like 'Single%'
-
 
 
